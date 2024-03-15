@@ -20,3 +20,9 @@ def test_save_streetlights():
     sta.save_streetlights('CARLING', 0.0002, r"..\..\..\..\data\Ottawa\outputs\Streetlight_Selected.shp")
     actual = os.path.exists(r"..\..\..\..\data\Ottawa\outputs\Streetlight_Selected.shp")
     assert expected == actual
+
+def test_show_road_names():
+    expected = 'CARLING'
+    pattern = 'CARLING'
+    actual = sta.show_road_names(pattern)
+    assert expected == actual
