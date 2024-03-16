@@ -37,16 +37,14 @@ def save_streetlights(road_name, distance, out_fc):
 def show_road_names(pattern=None):
     fc = roads_cl_fc
     field_name = road_name_field
-    unique_road_names = _get_unique_values(fc, field_name)
     if pattern == None:
-        return unique_road_names
+        valid_road_names = _get_unique_values(fc, field_name)
+        return valid_road_names
     else:
-        for road_name in unique_road_names:
-            where_clause = f"'{road_name}' LIKE '%{pattern}%'"
-            with arcpy.da.SearchCursor(fc, field_name, where_clause) as cursor:
-                for road_name in cursor:
-                    return road_name
-            
+        where_clause = f"{field_name} LIKE UPPER('%{pattern}%')"
+        with arcpy.da.SearchCursor(fc, field_name, where_clause) as cursor:
+            for row in cursor:
+                return row[0]
 
 def _select_streetlights(road_name, distance):
     ws = roads_cl_fc

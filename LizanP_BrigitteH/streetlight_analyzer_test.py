@@ -22,7 +22,7 @@ def test_save_streetlights():
     assert expected == actual
 
 def test_show_road_names():
-    expected = 'CARLING'
-    pattern = 'CARLING'
+    expected = 'CARLING AVE'
+    pattern = 'carling'
     actual = sta.show_road_names(pattern)
     assert expected == actual
